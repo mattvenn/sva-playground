@@ -6,16 +6,14 @@ module safe (
     output wire unlocked
   );
 
-  typedef enum {
-    PIN_0,
-    PIN_1,
-    PIN_2,
-    PIN_3,
-    LOCKOUT,
-    UNLOCKED
-  } state_t;
+    localparam PIN_0 = 0;
+    localparam PIN_1 = 1;
+    localparam PIN_2 = 2;
+    localparam PIN_3 = 3;
+    localparam LOCKOUT = 4;
+    localparam UNLOCKED = 5;
 
-  state_t state = PIN_0;
+  reg [2:0] state = PIN_0;
 
   assign unlocked = state == UNLOCKED;
 
@@ -54,4 +52,9 @@ module safe (
       end
     end
   end
+
+  `ifdef FORMAL
+    always @(*)
+        cover(unlocked);
+  `endif
 endmodule

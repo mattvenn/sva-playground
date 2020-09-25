@@ -6,9 +6,8 @@ depth 50
 smtbmc z3
 
 [script]
-read -formal safe.sv tb.sv
-prep -top testbench
+read -formal safe.sv 
+prep -top safe
 
 [files]
 safe.sv
-tb.sv
